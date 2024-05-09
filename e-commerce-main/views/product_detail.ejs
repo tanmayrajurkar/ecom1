@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/star-style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+        integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+        crossorigin="anonymous" />
+
+    <title>E-Commerce</title>
+</head>
+
+<body id="top">
+
+    <section class="header_menu" id="header_menu">
+        <div class="container-fluid px-0 shadow">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light py-3  ">
+                <a class="navbar-brand pl-5" href="javascript:;">
+                    <img src="assets/images/logo.png" class="img img-fluid" width="120px" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product?category=smartphones">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product/category">Category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact Us</a>
+                        </li>
+
+                    </ul>
+                    
+                        <div class="search mr-3">
+                            <% if (typeof user !=='undefined' && !("message" in user) ) { %>
+                                <a href="/logout">
+                                    <span class="btn btn-sm btn-outline-primary">Logout</span>
+                                  </a>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <%= user.DisplayName %>
+                                </button>
+                                <% } else {%>
+                                    <a href="/login" class="btn btn-sm btn-outline-primary">
+                                        Sign in
+                                    </a>
+                                    <% } %>
+                        </div>
+                        <div class="cart">
+                            <% if (typeof user !=='undefined' && !("message" in user) ) { %>
+                                <a href="/cart/items">
+                                    <i class="fas fa-shopping-cart fa-2x"></i>
+                                    <span class="badge badge-pill badge-primary">24</span>
+                                </a>
+                                <% } %>
+                        </div>
+                    </div>
+            </nav>
+        </div>
+    </section>
+
+    <section class="product_detail py-5 my-5" id="product_detail">
+        <div class="container ">
+            <div class="section_title text-center mb-5">
+                <h1 class="text-capitalize">product detail</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="carouselExampleIndicators" class="carousel slide shadow rounded"
+                                data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <% for (let i=0; i < productWithId.images.length; i+=1) { %>
+                                        <% if(i===0) { %>
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="0"
+                                                class="active">
+                                                <img src=" <%= productWithId.images[i] %> "
+                                                    class="d-block w-50 img img-fluid rounded" width="15px" alt="image">
+                                            </li>
+                                            <% } else { %>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>">
+                                                    <img src="<%= productWithId.images[i] %>"
+                                                        class="d-block w-50 img img-fluid rounded" width="15px"
+                                                        alt="image">
+                                                </li>
+                                                <% } %>
+                                                    <% } %>
+
+                                </ol>
+                                <div class="carousel-inner">
+                                    <% for (let i=0; i < productWithId.images.length; i+=1) { %>
+                                        <% if(i===1) { %>
+                                            <div class="carousel-item active">
+                                                <img src=" <%= productWithId.images[i] %> "
+                                                    class="d-block w-100 img img-fluid rounded" alt="image"
+                                                    style="height: 550px;">
+                                            </div>
+                                            <% } else { %>
+                                                <div class="carousel-item">
+                                                    <img src=" <%= productWithId.images[i] %> "
+                                                        class="d-block w-100 img img-fluid rounded" alt="image"
+                                                        style="height: 550px;">
+                                                </div>
+                                                <% } %>
+                                                    <% } %>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="title mb-4">
+                                <h3 class="first-capital">
+                                    <%= productWithId.title %>
+                                </h3>
+                            </div>
+                            <div class="category mb-4">
+                                <span class="bg-light-gray p-2"><a class="first-capital" href="category.html">
+                                        <%= productWithId.category %>
+                                    </a></span>
+                            </div>
+                            <div class="Stars"
+                                style="--rating: <%= productWithId.rating %>; padding: 6px;height: 34px;border-radius: 7px;background: #eaeaea;  "
+                                aria-label="Rating of this product is 2.3 out of 5."></div>
+                            <div class="price mb-4">
+                                <b><span class="mr-1">$</span><span>
+                                        <%= productWithId.price %>
+                                    </span></b>
+                            </div>
+                            <div class="desc">
+                                <p class="first-capital">
+                                    <%= productWithId.description %> Lorem ipsum, dolor sit amet consectetur adipisicing
+                                        elit. Et, culpa quia fugiat illo aut, quis aperiam a repellendus autem nihil
+                                        dolores nam fugit cumque. Neque, ea. Necessitatibus porro maiores eveniet.
+                                </p>
+                            </div>
+                            <form action="/cart" method="post">
+                                <div class="qty_section border-top pt-2 mb-4">
+                                    <label>Quantitiy</label>
+                                    <div>
+                                        <div class="mb-0 w-100">
+                                            <input class="quantity text-center" min="0" max="10" name="quantity"
+                                                value="1" type="number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buy">
+                                    <!-- <input type="hidden" name="quantityInput" > -->
+                                    <input type="hidden" name="productId" value="<%= productWithId.id %>">
+                                    <% if (user===undefined) { %>
+                                        <button type="button" class="btn btn-primary shadow" id="AddToCart"
+                                            onclick="alert('Please sign in to continue')">Add to Cart</button>
+
+                                        <% } else { %>
+                                            <button type="submit" class="btn btn-primary shadow" id="AddToCart">Add to
+                                                Cart</button>
+                                            <% } %>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- ----------------related products starts here---------- -->
+            <section class="related_products py-5 my-5" id="related_products">
+                <div class="title">
+                    <h3>Related Products</h3>
+                </div>
+                <div class="row mt-5">
+                    <% for(let i=0; i<3; i++) { %>
+                        <div class="col-md-4 col-6">
+                            <div class="border border-dark rounded shadow text-center p-3">
+                                <div class="mb-4">
+                                    <img src="<%= products[i].thumbnail %>" class="img img-fluid" alt="image"
+                                        style="height: 345px;">
+                                </div>
+                                <div>
+                                    <a href="/product?id=<%= products[i].id %>&category=<%= products[i].category %>">
+                                        <h5>
+                                            <%= products[i].title %>
+                                        </h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+
+
+    <section class="footer_section pt-5 pb-2" id="footer_section">
+        <footer>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3 col-6 pl-5 pl-small-15">
+                <div class="footer_title">
+                  <a href="/product"><img src="assets/images/logo.png" width="150px" class="img img-fluid" alt="logo"></a>
+                </div>
+                <div>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit, totam est illum ipsum quas ad
+                  dignissimos magni veritatis natus voluptatem.
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="footer_title pt-3 mb-3">
+                  <h3>Quick Links</h3>
+                </div>
+                <div class="footer_links">
+                  <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/product">Offers & Discounts</a></li>
+                    <li><a href="/product">Get Coupon</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="footer_title pt-3 mb-3">
+                  <h3>New Products</h3>
+                </div>
+                <div class="footer_links">
+                  <ul>
+                    <li><a href="/product?category=womens-dresses">Woman Cloth</a></li>
+                    <li><a href="/product?category=womens-jewellery">Fashion Accessories</a></li>
+                    <li><a href="/product?category=mens-watches">Man Accessories</a></li>
+                    <li><a href="/product?category=sunglasses">Sunglasses</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="footer_title pt-3 mb-3">
+                  <h3>Support</h3>
+                </div>
+                <div class="footer_links">
+                  <ul>
+                    <li><a href="#">Frequently Asked Questions</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Report a Payment Issue</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-top">
+            <h6 class="text-center mt-3">Copyright ©PrTK 2023 All rights reserved
+            </h6>
+          </div>
+        </footer>
+      </section>
+    <div class="backtop">
+        <a id="button" href="#top" class="btn btn-lg btn-outline-danger" role="button">
+            <i class="fas fa-chevron-up text-dark"></i>
+        </a>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <!-- <script src="../assets/js/Addtocart.js"></script> -->
+</body>
+
+</html>

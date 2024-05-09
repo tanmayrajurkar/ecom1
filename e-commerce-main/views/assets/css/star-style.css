@@ -1,0 +1,74 @@
+:root {
+    --star-size: 22px;
+    --star-color: #fff;
+    --star-background: #fc0;
+  }
+  
+  .Stars {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Times; /* Make sure ★ appears correctly */
+    line-height: 1;
+  
+    &::before {
+      content: '⭐⭐⭐⭐⭐';
+      letter-spacing: 3px;
+      background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+    /* Add border to specific star */
+    &::before:nth-child(3) {
+      border: 2px solid #000000;
+      padding: 3px;
+    }
+  }
+  
+.first-capital::first-letter {
+  text-transform: capitalize;
+}
+
+.scrollable-category{
+  overflow-y: auto;
+  height: 350px;
+}
+
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #eff1f3;
+  width: 34vw;
+  padding: 20px;
+  border-radius: 10px;
+  /* color: white; */
+  text-align: center;
+}
+
+.popup-content {
+  position: relative;
+  background-color:#fefefe;
+  padding: 29px;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media(max-width: 750px){
+  
+  .popup{
+    width: 80vw;
+  }
+
+}
